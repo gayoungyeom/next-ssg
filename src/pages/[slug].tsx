@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import { getAllPosts, getPostBySlug } from '../api';
+import markdownToHtml from '../utils';
 
 export type Post = {
   slug: string;
@@ -11,6 +12,7 @@ const Post: NextPage<{ post: Post }> = ({ post }) => {
   return (
     <div>
       <h1>{post.title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: post.content }} />
     </div>
   );
 };
@@ -22,8 +24,10 @@ type Parmas = {
 };
 
 export const getStaticProps = async ({ params: { slug } }: Parmas) => {
-  const post = getPostBySlug(slug, ['slug', 'title']);
-  return { props: { post: { ...post } } };
+  const post = getPostBySlug(slug, ['slug', 'title', 'content']);
+  const content = await markdownToHtml(post.content);
+
+  return { props: { post: { ...post, content } } };
 };
 
 export const getStaticPaths = async () => {
