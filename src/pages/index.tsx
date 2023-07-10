@@ -1,27 +1,30 @@
-import Link from 'next/link';
 import { getAllPosts } from '../api';
 import type { NextPage } from 'next';
 import type { Post } from './[slug]';
+import PostBox from '../components/PostBox';
+import { styled } from 'styled-components';
 
 const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
   return (
     <div>
-      <ul>
+      <PostBoxes>
         {posts.map((post, index) => (
-          <li key={`${post.title}-${index}`}>
-            <Link href={`/${post.slug}`} key={post.slug}>
-              {post.title}
-            </Link>
-          </li>
+          <PostBox key={`${post.title}-${index}`} post={post} />
         ))}
-      </ul>
+      </PostBoxes>
     </div>
   );
 };
 
 export const getStaticProps = () => {
-  const posts = getAllPosts(['slug', 'title']);
+  const posts = getAllPosts(['slug', 'title', 'author', 'preview', 'date']);
   return { props: { posts } };
 };
 
 export default Home;
+
+const PostBoxes = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

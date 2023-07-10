@@ -5,15 +5,18 @@ import markdownToHtml from '../utils';
 export type Post = {
   slug: string;
   title: string;
+  author: string;
+  preview: string;
+  date: string;
   content: string;
 };
 
 const Post: NextPage<{ post: Post }> = ({ post }) => {
   return (
-    <div>
+    <>
       <h1>{post.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: post.content }} />
-    </div>
+    </>
   );
 };
 

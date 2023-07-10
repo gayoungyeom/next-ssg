@@ -18,7 +18,7 @@ const Layout = ({ children }: LayoutProps) => {
 export default Layout;
 
 const Container = styled.div`
-  width: 1024px;
+  max-width: 980px;
   margin: 0 auto;
-  border: 2px solid orange;
+  padding: 0 16px;
 `;
