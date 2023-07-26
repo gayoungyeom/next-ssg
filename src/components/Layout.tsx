@@ -1,3 +1,5 @@
+'use client';
+
 import type { ReactNode } from 'react';
 import GNB from './GNB';
 import { styled } from 'styled-components';
