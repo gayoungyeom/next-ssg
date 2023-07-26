@@ -1,6 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import { styled } from 'styled-components';
-import { Post } from '../pages/[slug]';
+import { Post } from '../app/[slug]/page';
 
 interface PostBoxProps {
   post: Post;
